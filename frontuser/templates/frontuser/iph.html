@@ -1,0 +1,28 @@
+
+{% extends 'frontuser/index.html' %}
+
+{% block body %}
+<div class="container">
+  <div id="heading-block"> 
+    <h2>Featured Brands</h2>
+    </div>
+    
+    
+      
+   </div>
+ </div>
+
+{% for product in object_list %}
+<a href="#">
+       <div class="catbox">
+    <img src="{{product.image.url}}" alt="men ">
+    <span>{{ product.name}}</span>
+    <span>{{ product.description}}</span>
+    <span>{{ product.slug}}</span>
+    </div>
+      </a>
+      <br>
+     {% endfor %}
+
+{% endblock %}
+

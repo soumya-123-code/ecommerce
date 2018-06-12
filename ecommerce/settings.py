@@ -27,6 +27,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+MEDIA_ROOT = "/home/soumya/Desktop/my backup linux/work_space/ecommerce/media"
+
+MEDIA_URL = "/media/"
+
 
 # Application definition
 

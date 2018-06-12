@@ -1,0 +1,15 @@
+{% extends 'frontuser/index.html' %}
+{% load static %}
+{% block body %}
+<div class="d-inline-flex p-3  flexfloatleft text-white">
+  {% for shirt in shirt_list %}
+  <div class="p-2 bg-white"> <img src="{{ shirt.image.url }}">
+   <div style="color:black"> <h3>{{ shirt.name }} </h3><h9>round neak T-shirt</h9>
+
+              <h5>{{shirt.price}}<span class="text-center"></span></h5></div>
+             <button class="btn btn-primary btn-sm">buy now</button>
+  </div>
+ </div>
+</div>
+{% endfor %}
+{% endblock %}

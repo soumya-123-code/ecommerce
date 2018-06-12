@@ -1,0 +1,106 @@
+{% load static %}
+{% load frontuserextra %}
+
+<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-primary">
+  <div class="container-fluid">
+    <img class="navbar-brand" src="{% static 'images/icons/flip.png' %}" width="10%" >
+    <div style="color:white">e-commerce</div>
+<form class="form-inline my-2 mr-auto my-lg-0">
+
+
+
+      <input class="form-control ml-sm-2 searchwidth" type="search" placeholder="Search for product,brand & more" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fa fa-search" aria-hidden="true"></i>
+</button>
+    </form>
+
+      
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item active">
+        <a class="nav-link" data-toggle="modal" data-target="#myModal">Login &amp; Sign Up</a>
+      </li>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          More
+        </a>
+  <div class="dropdown">
+  
+  </button>
+  <div class="dropdown-menu">
+  <a  class="dropdown-item"  href="#"><i class="fa fa-briefcase"></i> Sell On Flipkart</a>
+  <a  class="dropdown-item"  href="#"><i class="fa fa-question-circle" aria-hidden="true"></i>
+24X7 CustomerCare</a>
+  <a  class="dropdown-item" href="#"><i class="fa fa-line-chart" aria-hidden="true"></i>
+Advertise</a>
+  <a  class="dropdown-item" href="#"><i class="fa fa-download" aria-hidden="true"></i>
+Download App</a>
+</div> 
+</div>
+<div>
+      <li class="nav-item">
+        <a class="nav-link" href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
+cart</a>
+      </li>
+      
+        </div>
+      </li>
+    </ul>
+    </nav>
+  </div>
+
+
+   <div class="secondnav  ">
+  
+  
+<div class="center">
+ <div class="seconddropdown">
+    <button class="dropbtn">Men-Tshirt
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+     
+      <div class="row">
+        <div class="col righttext">
+         {% category_snippets main_menu="mt" %}
+
+        </div><br>
+          <div class="col navimgpad">
+            <img src="{% static 'images/j7.jpg'  %}">
+            
+          </div>
+        </div>
+       </div>
+      </div>
+
+    </div>
+
+ 
+   <div class="seconddropdown">
+    <button class="dropbtn">Mobile
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+    <div class="row">
+       {% for category in object_list %}
+          {% if category.main_menu == 'mb' %}
+
+          <a href="#">{{category.name}}</a><br>
+          {% endif %}
+                 {% endfor%}
+
+         
+     </div>
+     
+     </div>
+    </div>
+  </div>
+
+
+</div> 
+</div>
