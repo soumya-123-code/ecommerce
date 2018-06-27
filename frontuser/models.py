@@ -1,4 +1,11 @@
 from django.db import models
+from django.http import HttpResponse
+from django.shortcuts import render
+from django.dispatch import receiver
+from django.db.models.signals import post_save
+from django.contrib.auth.models import User
+
+
 
 class Category(models.Model):
     MAIN_MENU = (
@@ -82,3 +89,25 @@ class Product(models.Model):
    # updated_at – which tracks when product was updated.
 
 
+
+class Cart(models.Model):
+    profile = models.ForeignKey(User,   on_delete='CASCADE')
+    updated = models.DateTimeField(auto_now=True)
+    timestamp = models.DateTimeField(auto_now_add=True)
+    product=models.ForeignKey(Product,on_delete='CASCADE')
+    def __str__(self):
+        return "User: {} has {} items in their cart. Their total is ${}".format(self.user, self.count, self.total)
+    
+
+
+class Wishlist(models.Model):
+    profile = models.ForeignKey(User, null=True,  on_delete='CASCADE')
+    updated = models.DateTimeField(auto_now=True)
+    timestamp = models.DateTimeField(auto_now_add=True)
+    product=models.ForeignKey(Product,null=True,on_delete='CASCADE')
+    def __str__(self):
+        return "User: {} has {} items in their cart. Their total is ${}".format(self.user, self.count, self.total)
+
+    
+    class Meta:
+        unique_together=('product','profile')

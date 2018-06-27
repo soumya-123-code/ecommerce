@@ -1,5 +1,201 @@
- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
+<script>
+  var csrf_token = $('input[name=csrfmiddlewaretoken]').val()
+const app = new Vue({
+  delimiters: ['[[', ']]'],
+  el:'#modalapp',
+  data:{
+    errors:[],
+    fname:null,
+    lname:null,
+    email:null,
+    uname:null,
+    p:null,
+    c:null,
+    ajax:null,
+    in_username:null,
+    in_password:null,
+
+    
+  },
+  methods:{
+    checkForm:function(e) {
+
+      console.log("Hello World");
+      this.errors = [];
+      if(!this.fname) this.errors.push("First Name required.");
+      if(!this.lname) this.errors.push("last Name required.");
+      if(!this.p) this.errors.push("password requird");  
+      if(!this.c) this.errors.push("confirm password required");
+      if(this.p != this.c) this.errors.push("Password doesn't match");
+
+
+      if(!this.email) {
+        this.errors.push("Email required.");
+      } else if(!this.validEmail(this.email)) {
+        this.errors.push("Valid email required.");        
+      }
+      if(!this.errors.length) {
+        this.ajax = true; }
+        else { this.ajax= false};
+      console.log(this.ajax);
+      if(this.ajax == true) {
+      console.log(this.errors);
+      var data = {fname: this.fname, lname: this.lname, email:this.email, uname:this.uname, p:this.p, c:this.c };
+      console.log(data) 
+      this.$http.post("{% url 'frontuser:signup' %}",  data,  {
+    headers: {
+        'X-CSRFToken': csrf_token
+    }
+  }).then(response => {
+
+      // get status
+      response.status;
+
+      // get status text
+      response.statusText;
+
+      // get 'Expires' header
+      response.headers.get('Expires');
+
+      // get body data
+      this.someData = response.body;
+
+    }, response => {
+      // error callback
+  });
+    }
+
+
+
+
+
+      e.preventDefault();
+    },
+    validEmail:function(email) {
+      var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(email);
+    },
+    checkForm2:function(e) {
+
+        this.errors = [];
+     
+      if(!this.in_username) this.errors.push("confirm uname required");
+      if(!this.in_password ) this.errors.push("Password doesn't match");
+
+
+    
+      if(!this.errors.length) {
+        this.ajax = true; }
+        else { this.ajax= false};
+      console.log(this.ajax);
+      if(this.ajax == true) {
+      console.log(this.errors);
+      var data = { uname:this.in_username, p:this.in_password };
+      console.log(data) 
+      this.$http.post("{% url 'frontuser:signup' %}",  data,  {
+    headers: {
+        'X-CSRFToken': csrf_token
+    }
+  }).then(response => {
+
+      // get status
+      response.status;
+
+      // get status text
+      response.statusText;
+
+      // get 'Expires' header
+      response.headers.get('Expires');
+
+      // get body data
+      this.someData = response.body;
+
+    }, response => {
+      // error callback
+  });
+    }
+
+
+
+
+
+      e.preventDefault();
+    },
+
+    }
+  });
+</script>
+<script>
+  const app2 = new Vue({
+  delimiters: ['[[', ']]'],
+  el:'#modalapp2',
+  data:{
+    errors:[],
+    in_username:null,
+    in_password:null,
+
+    
+  },
+  methods:{
+  
+    checkForm2:function(e) {
+
+        this.errors = [];
+     
+      if(!this.in_username) this.errors.push("confirm uname required");
+      if(!this.in_password ) this.errors.push("Password doesn't match");
+
+
+    
+      if(!this.errors.length) {
+        this.ajax = true; }
+        else { this.ajax= false};
+      console.log(this.ajax);
+      if(this.ajax == true) {
+      console.log(this.errors);
+      var data = { uname:this.in_username, p:this.in_password };
+      console.log(data) 
+      this.$http.post("{% url 'frontuser:login' %}",  data,  {
+    headers: {
+        'X-CSRFToken': csrf_token
+    }
+  }).then(response => {
+
+      // get status
+      response.status;
+
+      // get status text
+      response.statusText;
+
+      // get 'Expires' header
+      response.headers.get('Expires');
+
+      // get body data
+      this.someData = response.body;
+      console.log(this.someData);
+
+    }, response => {
+      // error callback
+  });
+    }
+
+
+
+
+
+      e.preventDefault();
+    },
+
+    }
+  });
+</script>
+
+
+
 
 

@@ -7,22 +7,20 @@
     <h2>Featured Brands</h2>
     </div>
     
-    
+    <br>
       
    </div>
- </div>
 
-{% for product in object_list %}
-<a href="#">
-       <div class="catbox">
-    <img src="{{product.image.url}}" alt="men ">
-    <span>{{ product.name}}</span>
-    <span>{{ product.description}}</span>
-    <span>{{ product.slug}}</span>
+<div class="d-flex  bg-secondary text-white">
+{% for product in iphone_list %}
+ <div class="p-2 bg-white">
+      
+    <img src="{{product.image.url}}"/>
+    <div>{{ product.name}}</div>
+    <div>{{ product.description}}</div>
+    <div>{{ product.slug}}</div>
     </div>
-      </a>
-      <br>
      {% endfor %}
-
+</div>
 {% endblock %}
 

@@ -1,15 +1,14 @@
 {% load static %}
 <!doctype html>
 <html lang="en">
- {% block script%}
-  {% include "frontuser/headerscript.html" %}
+{% block script%}
+{% include "frontuser/headerscript.html" %}
 {% endblock %}
   <body>
 
-  {% block navigation %}
+{% block navigation %}
 {% include "frontuser/navigation.html" %}
-
-  {% endblock %}
+{% endblock %}
   
 
  
@@ -20,11 +19,18 @@
 {% endblock %}
 
 
+<div id="myapp">
+{% block signup %}
 
-  
- 
+{% include "frontuser/signup.html" %}
+
+{% endblock %} 
 
 
+{% block modal %}
+{% include "frontuser/login.html" %}
+{% endblock %}
+</div>
 
 {% block footerscript %}
 {% include "frontuser/footerscript.html" %}
