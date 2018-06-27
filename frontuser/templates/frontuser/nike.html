@@ -1,0 +1,26 @@
+
+{% extends 'frontuser/index.html' %}
+{% load static %}
+
+{% block body %}
+
+<div class="d-inline-flex p-3  text-white">
+  <div class="p-2 bg-white"> <img src="{% static 'images/j1.jpg' alt="img" class="card-img-top" %}">
+   <div style="color:black"> <h3>Nike </h3><h9>men-sneakers</h9>
+
+              <h5>Rs.<span class="text-center"></span></h5></div>
+             <button class="btn btn-primary btn-sm"><h6>sizes:5,6,7,8,9,10</h6></button>
+  </div>
+ {% for product in shooes_list %}
+<a href="#">
+       <div class="catbox">
+    <img src="{{product.image.url}}" alt="men ">
+    <span>{{ product.name}}</span>
+    <span>{{ product.description}}</span>
+    <span>{{ product.slug}}</span>
+    </div>
+      </a>
+      <br>
+     {% endfor %}
+
+{% endblock %}

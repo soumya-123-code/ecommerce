@@ -1,0 +1,63 @@
+{% load static %}
+<div id="myModal" class="modal fade" role="dialog">
+
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    
+      <div class="nav-tabs">
+        <div class="modal-content ">
+
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body modal_login_box">
+
+       <div class="row">
+                <div class="col">
+                    <img src="{% static 'images/j3.jpg' alt="img" class="card-img-top" %}">
+                </div>
+                <div class="col">
+                    <form id="modalapp2" @submit="checkForm2" action="" method="post" novalidate="true">
+              {% csrf_token %}
+              <p v-if="errors.length">
+                <b>Please correct the following error(s):</b>
+                <ul>
+                  <li v-for="error in errors">[[ error ]]</li>
+                </ul>
+              </p>
+             
+
+
+                 <p>
+                <label for="name">username/mob.</label>
+                <input type="text" name="in_username" id="in_username" v-model="in_username">
+              </p>
+
+                 <p>
+                <label for="name">password</label>
+                <input type="text" name="in_password" id="in_password" v-model="in_password">
+              </p>
+
+              
+
+
+
+             
+              <p>
+                <input type="submit"  value="signup">  
+              </p>
+
+            </form>
+            </div>
+        </div>
+
+
+
+    </div>
+
+</div>
+
+</div>
+
+
