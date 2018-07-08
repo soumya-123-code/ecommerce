@@ -1,5 +1,5 @@
 {% load static %}
-{% load frontuserextra %}
+
 
 <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-primary">
   <div class="container-fluid">
@@ -61,9 +61,42 @@ Download App</a>
 </div>
 <div>
       <li class="nav-item">
-        <a class="nav-link" href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
+        <!-- <a class="nav-link" href="{% url 'frontuser:cartdetails' %}"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
 cart</a>
-      </li>
+      </li> -->
+       <div class="header-cart-menu d-flex align-items-center ml-auto">
+                                    <!-- Cart Area -->
+                                    <div class="cart">
+                                        <a href="#" id="header-cart-btn" target="_blank"><span class="cart_quantity">2</span> <i class="ti-bag"></i> Your Bag $20</a>
+                                        <!-- Cart List Area Start -->
+                                        <ul class="cart-list">
+                                            <li>
+                                                <a href="#" class="image"><img src="img/product-img/product-10.jpg" class="cart-thumb" alt=""></a>
+                                                <div class="cart-item-desc">
+                                                    <h6><a href="#">Women's Fashion</a></h6>
+                                                    <p>1x - <span class="price">$10</span></p>
+                                                </div>
+                                                <span class="dropdown-product-remove"><i class="icon-cross"></i></span>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="image"><img src="img/product-img/product-11.jpg" class="cart-thumb" alt=""></a>
+                                                <div class="cart-item-desc">
+                                                    <h6><a href="#">Women's Fashion</a></h6>
+                                                    <p>1x - <span class="price">$10</span></p>
+                                                </div>
+                                                <span class="dropdown-product-remove"><i class="icon-cross"></i></span>
+                                            </li>
+                                            <li class="total">
+                                                <span class="pull-right">Total: $20.00</span>
+                                                <a href="cart.html" class="btn btn-sm btn-cart">Cart</a>
+                                                <a href="checkout-1.html" class="btn btn-sm btn-checkout">Checkout</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="header-right-side-menu ml-15">
+                                        <a href="#" id="sideMenuBtn"><i class="ti-menu" aria-hidden="true"></i></a>
+                                    </div>
+                                </div>
       
         </div>
       </li>
@@ -72,25 +105,9 @@ cart</a>
   </div>
 
 
-   <div class="secondnav  ">
+   
   
-  
-<div class="center">
- <div class="seconddropdown">
-    <button class="dropbtn">Men-Tshirt
-      <i class="fa fa-caret-down"></i>
-    </button>
-    <div class="dropdown-content">
-     
-      <div class="row">
-        <div class="col righttext">
-         {% category_snippets main_menu="mt" %}
 
-        </div><br>
-          <div class="col navimgpad">
-            <img src="{% static 'images/j7.jpg'  %}">
-            
-          </div>
         </div>
        </div>
       </div>
@@ -98,26 +115,14 @@ cart</a>
     </div>
 
  
-   <div class="seconddropdown">
-    <button class="dropbtn">Mobile
-      <i class="fa fa-caret-down"></i>
-    </button>
-    <div class="dropdown-content">
-    <div class="row">
-       {% for category in object_list %}
-          {% if category.main_menu == 'mb' %}
-
-          <a href="#">{{category.name}}</a><br>
-          {% endif %}
-                 {% endfor%}
-
-         
-     </div>
+   
      
      </div>
     </div>
   </div>
+    
 
 
 </div> 
 </div>
+

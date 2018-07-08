@@ -1,5 +1,5 @@
 from django.contrib import admin
-from frontuser.models import Category,Product
+from frontuser.models import Product
 
 
 from django.utils.datetime_safe import datetime
@@ -8,7 +8,7 @@ from frontuser.models import Product, Cart
 
 
 # Register your models here.
-admin.site.register(Category)
+
 admin.site.register(Product)
 
 

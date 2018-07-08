@@ -6,7 +6,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.http import JsonResponse
 from django.views.generic.edit import CreateView
 from django.views.generic import ListView
-from frontuser.models import Product, Category
+from frontuser.models import Product
 from django.views.generic import DetailView
 from django.contrib.auth.forms import UserCreationForm
 import json
@@ -15,24 +15,10 @@ from frontuser.models import Cart, Product
 from django.shortcuts import get_object_or_404
 
 # Create your views here.
-class CategoryList(ListView):
-    template_name = 'frontuser/index.html'
-    model = Category
+def home(request):
+    men=Product.objects.filter(main_menu='mn')
+    return render(request,'frontuser/index.html',{'men':men})
 
-class IphoneList(ListView):
-    template_name = 'frontuser/iph.html'
-    context_object_name="iphone_list"
-    queryset=Product.objects.filter(category__main_menu="mb")
-
-class TshirtList(ListView):
-    template_name = 'frontuser/shirtflex.html'
-    context_object_name = 'shirt_list'
-    queryset = Product.objects.filter(category__main_menu="mt")
-
-class ShooesList(ListView):
-    template_name = 'frontuser/nike.html'
-    context_object_name = 'shooes_list'
-    queryset = Product.objects.filter(category__main_menu="sh")
 
 
 def registration(request):
@@ -50,6 +36,26 @@ def registration(request):
             user=User.objects.create_user(username,email=email,password=password,first_name=firstname,last_name=lastname)
         return HttpResponse("success")
 
+
+
+
+def cartcreate(request):
+    if request.method == 'POST' and request.is_ajax():
+        data = json.loads(request.body)
+        print(data)
+        productId=data.get('pdi')
+        quantity=data.get('qnt')
+        size=data.get('sz')
+        my_object = get_object_or_404(Product, pk=productId)
+     
+        user=Cart.objects.create(profile=request.user,quantity=quantity,product=my_object,size=size)
+        return HttpResponse("success")
+
+
+         
+
+
+
 def addproduct(request,product_id):
     my_object = get_object_or_404(Product, pk=product_id)
     product_object = Cart.objects.create(profile=request.user, product=my_object)
@@ -59,11 +65,20 @@ def addwish(request,product_id):
     my_object = get_object_or_404(Product, pk=product_id)
     product_object = Cart.objects.create(profile=request.user, product=my_object)
 
+def cartdetails(request):
+    my_object = Cart.objects.filter(profile=request.user)
+    for obj in my_object:
+        print(obj.product) 
+    return render(request, 'frontuser/cartdetails.html', {'my_object': my_object})
 
+def removecart(request,product_id):
+    obj=get_object_or_404(Cart, product=product_id)
+    obj.delete()
+    return HttpResponse("successfully deleted")
 
-         
-   
-
+def modalbox(request, product_id):
+    my_object = get_object_or_404(Product, pk=product_id)  
+    return render(request, 'frontuser/modal.html', {'obj': my_object})
 
 
 class AjaxableResponseMixin:
@@ -124,39 +139,3 @@ def details(request,id):
     return render(request, 'polls/details.html', {"p":p})
 
 
-
-
-
-
-
-
-
-
-
-#Views.py extract
-
-
-
-
-
-def test_view(request):
-    # Based on the user who is making the request, grab the cart object
-    my_cart = Cart.objects.get_or_create(user=User)
-    # Get entries in the cart
-    my_carts_current_entries = Entry.objects.filter(cart=my_cart)
-    # Get a list of your products
-    products = Product.objects.all()
-
-    if request.POST:
-        # Get the product's ID from the POST request.
-        product_id = request.POST.get('product_id')
-        # Get the object using our unique primary key
-        product_obj = Product.objects.get(id=product_id)
-        # Get the quantity of the product desired.
-        product_quantity = request.POST.get('product_quantity')
-        # Create the new Entry...this will update the cart on creation
-        Entry.objects.create(cart=my_cart, product=product_obj, quantity=product_quantity)
-        return HttpResponse('somewhereelse.html')
-
-    return render(request, 'something.html', {'my_cart': my_cart, 'my_carts_current_entries': my_carts_current_entries,
-                                              'products': products})

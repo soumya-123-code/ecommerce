@@ -5,6 +5,37 @@
   {% for shirt in shirt_list %}
   <div class="p-2 bg-white"> <img src="{{ shirt.image.url }}">
    <div style="color:black"> <h3>{{ shirt.name }} </h3><h9>round neak T-shirt</h9>
+                                <div class="widget color mb-70">
+                              
+                                <div class="widget-desc">
+                                    <ul class="d-flex justify-content-between">
+                                        <li class="gray"><a href="#"></a></li>
+                                        <li class="red"><a href="#"></a></li>
+                                        <li class="yellow"><a href="#"></a></li>
+                                        <li class="green"><a href="#"></a></li>
+                                        <li class="teal"><a href="#"></a></li>
+                                        <li class="cyan"><a href="#"></a></li>
+                                    </ul>
+                                </div>
+                            </div><br>
+
+
+
+                           <div class="widget size mb-50">
+                                <h6 class="widget-title">Size</h6>
+                                <div class="widget-desc">
+
+
+   	                                  <ul class="d-flex justify-content-between">
+                                        <li><a href="#">s</a></li>
+                                        <li><a href="#">m</a></li>
+                                        <li><a href="#">l</a></li>
+                                        <li><a href="#">xl</a></li>
+                                        <li><a href="#">xxl</a></li>
+                                       
+                                    </ul>
+                                </div>
+                            </div>
 
               <h5>{{shirt.price}}<span class="text-center"></span></h5></div>
              <a class="btn btn-primary btn-sm" href="{% url 'frontuser:addcart' shirt.id %}">buy now</a>

@@ -27,7 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-MEDIA_ROOT = "/home/soumya/Documents/work_space/ecommerce/media"
+MEDIA_ROOT = "/home/amiya/Documents/workspace/soumya/ecommerce/media"
 
 MEDIA_URL = "/media/"
 

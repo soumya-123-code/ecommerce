@@ -1,0 +1,5 @@
+{% for obj in my_object %}
+{{ obj.product}} <br>
+<img src="{{obj.product.image.url}}" alt=""><br>
+<a href="{% url 'frontuser:removecart' obj.product.id %}">Remove from Cart</a><br><br><br>
+{% endfor %}
